@@ -4,8 +4,8 @@ class TeacherCalendarsController < ApplicationController
   end
 
   def insert
-    start_time = '2016-4-10 16:00:00'.to_time
-    end_time = '2016-4-10 18:00:00'.to_time
+    start_time = AvailableSection.time_shif_to_half_an_hour('2016-4-10 16:20:00'.to_time , 'after')
+    end_time = AvailableSection.time_shif_to_half_an_hour('2016-4-10 19:45:00'.to_time , 'before')
     z = (end_time - start_time) / 30.minute
     section_attr = Array.new
 
