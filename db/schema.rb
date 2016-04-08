@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160407113718) do
 
   create_table "available_sections", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "index"
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at", null: false
@@ -24,7 +23,6 @@ ActiveRecord::Schema.define(version: 20160407113718) do
 
   create_table "booked_sections", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "index"
     t.integer  "available_sections_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
