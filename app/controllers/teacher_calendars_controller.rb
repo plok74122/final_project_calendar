@@ -3,6 +3,18 @@ class TeacherCalendarsController < ApplicationController
 
   end
 
+  def fullcalendar
+  end
+
+  def teacher_available_section
+    @teacher_calendar = AvailableSection.all()
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml { render :xml => @teacher_calendar.to_xml }
+      format.json { render :json => @teacher_calendar.to_json }
+    end
+  end
+
   def insert
     start_time = AvailableSection.time_shif_to_half_an_hour('2016-4-10 16:20:00'.to_time , 'after')
     end_time = AvailableSection.time_shif_to_half_an_hour('2016-4-10 19:45:00'.to_time , 'before')

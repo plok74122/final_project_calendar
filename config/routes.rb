@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resource :teacher_calendar do
     member do
       get 'insert'
+      get 'fullcalendar'
+      get 'teacher_available_section'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

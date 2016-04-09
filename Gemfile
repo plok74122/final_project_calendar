@@ -49,6 +49,8 @@ gem 'momentjs-rails', '>= 2.9.0'
 # bulk_insert
 gem 'bulk_insert'
 
+# jquery ui
+gem 'jquery-ui-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

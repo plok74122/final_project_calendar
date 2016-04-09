@@ -1,0 +1,30 @@
+<div id='calendar' style="width:60% ; height:60%"></div>
+<script>
+  $(document).ready(function () {
+
+// page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+      theme: true,
+      header: {
+//        left: 'prev,next today',
+//        center: 'title',
+//        right: 'month,agendaWeek,agendaDay'
+      },
+      defaultDate: '2016-04-09',
+      defaultView: 'agendaWeek',
+//      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+//      events: 'http://localhost:3000/teacher_calendar/teacher_available_section.json'
+      eventSources: [
+        {
+          //teacher events source
+          url: 'http://localhost:3000/teacher_calendar/teacher_available_section.json', // use the `url` property
+          backgroundColor :'blue',
+          rendering: 'background',
+        }
+      ]
+    });
+
+  });
+</script>
