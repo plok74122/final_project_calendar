@@ -23,9 +23,10 @@ ActiveRecord::Schema.define(version: 20160407113718) do
 
   create_table "booked_sections", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "available_sections_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "available_section_id"
+    t.integer  "booked_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
 end

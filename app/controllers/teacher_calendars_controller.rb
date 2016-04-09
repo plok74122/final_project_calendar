@@ -15,6 +15,19 @@ class TeacherCalendarsController < ApplicationController
     end
   end
 
+  def student_booked_section
+    @booked_calendar = BookedSection.select('booked_sections.id,min(available_sections.start) as start,max(available_sections.end) as end').joins(:available_section).group('booked_sections.booked_id')
+    # @booked_calendar = Array.new
+    # booked_calendar_temp.each do |booked|
+    #   @booked_calendar << {:id => booked.id , :start => booked.start.to_time , :end =>booked.end.to_time}
+    # end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml { render :xml => @booked_calendar.to_xml }
+      format.json { render :json => @booked_calendar.to_json }
+    end
+  end
+
   def insert
     start_time = AvailableSection.time_shif_to_half_an_hour('2016-4-10 16:20:00'.to_time , 'after')
     end_time = AvailableSection.time_shif_to_half_an_hour('2016-4-10 19:45:00'.to_time , 'before')

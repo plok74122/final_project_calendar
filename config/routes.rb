@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get 'insert'
       get 'fullcalendar'
       get 'teacher_available_section'
+      get 'student_booked_section'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
