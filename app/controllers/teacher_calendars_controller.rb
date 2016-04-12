@@ -1,5 +1,5 @@
 class TeacherCalendarsController < ApplicationController
-  protect_from_forgery :except => :create
+  # protect_from_forgery :except => :create
   before_action :set_available_section, :only => [:create]
 
   def index
