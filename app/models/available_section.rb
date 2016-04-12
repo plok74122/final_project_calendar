@@ -23,7 +23,7 @@ class AvailableSection < ActiveRecord::Base
       elsif action =='before'
         chosetime = chosetime.at_beginning_of_hour + 30.minute
       end
-      chosetime
     end
+    chosetime
   end
 end

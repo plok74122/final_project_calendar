@@ -1,4 +1,4 @@
-<div id='calendar' style="width:60% ; height:60%"></div>
+<div id='calendar' style="width:100% ; height:100%"></div>
 <script>
   $(document).ready(function () {
 
@@ -11,8 +11,60 @@
 //        center: 'title',
 //        right: 'month,agendaWeek,agendaDay'
       },
+      //24小時制 大寫H
+      timeFormat: 'H:mm',
+      //移除allDay的欄位
+      allDaySlot: false,
       defaultDate: '2016-04-09',
       defaultView: 'agendaWeek',
+      timezone: 'Asia/Taipei',
+      //選擇時段功能
+      selectable: true,
+      selectHelper: true,
+      select: function (start, end) {
+//        var title = prompt('設定可預約時段在');
+        var c = confirm("是否設定可預約時段？" + start)
+//        console.log(start);
+//        console.log(end);
+        var eventData;
+        if (c) {
+//          eventData = {
+//            start: '2016-04-08T11:00:00.000+08:00',
+//            end: '2016-04-08T12:00:00.000+08:00'
+//          };
+//          做一個ajax
+          $.ajax({
+            url: 'http://localhost:3000/teacher_calendar.json',
+            data: {start: start.format(), end: end.format()},
+            type: "POST",
+            dataType: 'text',
+
+            success: function (msg) {
+              console.log(msg)
+              var events = JSON.parse(msg);
+              for (var k in events) {
+                console.log(k, events[k])
+                eventData = {
+                  start: events[k].start,
+                  end: events[k].end,
+                  backgroundColor: 'blue',
+                  rendering: 'background',
+                };
+                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+              }
+
+
+            },
+
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert(xhr.status);
+              alert(thrownError);
+            }
+          });
+        }
+        $('#calendar').fullCalendar('unselect');
+      },
+
 //      editable: true,
       eventLimit: true, // allow "more" link when too many events
 //      events: 'http://localhost:3000/teacher_calendar/teacher_available_section.json'
@@ -20,14 +72,14 @@
         {
           //teacher events source
           url: 'http://localhost:3000/teacher_calendar/teacher_available_section.json', // use the `url` property
-          backgroundColor :'blue',
+          backgroundColor: 'blue',
           rendering: 'background',
         },
         {
           url: 'http://localhost:3000/teacher_calendar/student_booked_section.json', // use the `url` property
-          backgroundColor :'red',
+          backgroundColor: 'red',
         }
-      ]
+      ],
     });
 
   });
